@@ -1,8 +1,7 @@
 console.log("Welcome To EmployeeWage Program");
 
 /**
- * @description //UC5: Calculating Wages till a Condition of totalWorkingHours of 160 or 
- *                     max days of 20 is reached for a month
+ * @description //UC6: Store the Daily Wage along with the Total Wage
  * param: Here empCheck Generates Random Value 0 Or 1 Or 2
  *        if 0 - Employee Absent,  1 - Employee Part_Time, 2 - Employee Full_Time
  **/
@@ -24,14 +23,22 @@ function getWorkingHours(empCheck) {
            return empHrs = 0;                
    }
 }
+
+function calcDailyWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR;
+}
   
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
+let empDailyWageArr = new Array; //Define Array of Dailywage
+
 while(totalEmpHrs < MAX_HOURS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
     let empCheck = Math.floor(Math.random() * 10) % 3;
-    totalEmpHrs += getWorkingHours(empCheck);  //Calling the Function
-
+    let empHrs = getWorkingHours(empCheck);  //Calling the Function
+    totalEmpHrs += empHrs;
+    empDailyWageArr.push(calcDailyWage(empHrs)); //calling the function
 }
-let empWage = totalEmpHrs * WAGE_PER_HOUR; 
-console.log("Total Days: " +totalWorkingDays+ " Total Hours: " +totalEmpHrs+ " Employee Wage: " +empWage);
+
+let empWage = calcDailyWage(totalEmpHrs); 
+console.log("UC6 - Total Days: " +totalWorkingDays+ " Total Hours: " +totalEmpHrs+ " Employee Wage: " +empWage);
