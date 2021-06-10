@@ -9,10 +9,12 @@ class EmployeePayrollData {
     /**
      * @description Create Constructor for Initializing the Properties
      **/
-    constructor(id,name,salary) {
-        this.id = id;
-        this.name = name;
-        this.salary = salary;
+    constructor(...params) {
+        this.id = params[0];
+        this.name = params[1];
+        this.salary = params[2];
+        this.gender = params[3];
+        this.startDate = params[4];
     }
 
     /**
@@ -40,7 +42,11 @@ class EmployeePayrollData {
 
     //method
     toString() {
-        return "id = " +this.id+ ", name = " +this.name+ ", salary = " +this.salary;
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        const empDate = !this.startDate ? "undefined" :
+                        this.startDate.toLocaleDateString("en-US",options);
+        return "id = " +this.id+ ", name = " +this.name+ ", salary = " +this.salary+ 
+                         ", gender = " +this.gender+ ", Start Date = " +empDate;
     }
 }
 
@@ -53,3 +59,6 @@ employeePayrollData.name = "John";
 employeePayrollData.id = 2;
 employeePayrollData.salary = 400000;
 console.log(employeePayrollData.toString());
+
+let newEmployeePayrollData = new EmployeePayrollData(1,"Terrisa", 500000, "F",new Date());
+console.log(newEmployeePayrollData.toString());
